@@ -272,3 +272,22 @@ img { max-width: 100%; display: block; }
 /* Contact (info only, no form) */
 .contact-grid.single { grid-template-columns: 1fr; }
 .contact-grid.single .contact-info ul { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+/* Work samples */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+a.sample-link { color: var(--accent-2); font-weight: 500; }
+.sample-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.2rem; }
+.sample-group h3 { font-size: 1.1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: .6rem; }
+.sample-group h3 i { color: var(--accent); }
+.link-list { display: grid; gap: .4rem; }
+.link-list a {
+  display: flex; align-items: center; gap: .7rem; padding: .55rem .8rem; border-radius: 10px;
+  color: var(--text); font-size: .93rem; border: 1px solid transparent; transition: background .2s, border-color .2s;
+}
+.link-list a:hover { background: var(--surface-2); border-color: var(--border); text-decoration: none; }
+.link-list a i { color: var(--accent-2); font-size: .8rem; }
+.pdf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 1.2rem; }
+.pdf-card { display: flex; flex-direction: column; gap: .7rem; align-items: flex-start; }
+.pdf-card h3 { font-size: 1.1rem; margin: 0; }
+.pdf-card p { color: var(--muted); font-size: .93rem; margin: 0; flex: 1; }
+.pdf-meta { font-size: .8rem; color: var(--muted); }
