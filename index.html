@@ -57,21 +57,12 @@
             <a href="#contact" class="btn btn-ghost">Contact Me</a>
           </div>
           <ul class="socials" aria-label="Social links">
-            <!-- TODO: replace href="#" with your real URLs and remove the "placeholder-link" class -->
-            <li><a href="#" class="placeholder-link" data-name="LinkedIn" aria-label="LinkedIn [Add LinkedIn URL]"><i class="fa-brands fa-linkedin-in"></i></a></li>
-            <li><a href="#" class="placeholder-link" data-name="GitHub" aria-label="GitHub [Add GitHub URL]"><i class="fa-brands fa-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/vrs-gowrishankar/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in a new tab)"><i class="fa-brands fa-linkedin-in"></i></a></li>
+            <li><a href="https://gowrishankar-r.github.io/" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><i class="fa-brands fa-github"></i></a></li>
             <li><a href="mailto:vrs.gowrishankar@gmail.com" aria-label="Email Gowrishankar"><i class="fa-solid fa-envelope"></i></a></li>
           </ul>
         </div>
 
-        <div class="hero-photo reveal">
-          <!-- To add your photo: replace the div below with
-               <img src="profile.jpg" alt="Gowrishankar R" /> -->
-          <div class="photo-frame" role="img" aria-label="Profile photo placeholder">
-            <span>GR</span>
-            <small>[Add Profile Photo]</small>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -221,7 +212,7 @@
                 <li>Validated accuracy through hands-on product testing, lab environments and customer ticket analysis.</li>
                 <li>Integrated Jira sprint and scrum planning into the documentation lifecycle to sync deliverables with SDLC milestones.</li>
                 <li>Led the Early Access and Pilot Program with cross-functional stakeholders to confirm content readiness before GA launch.</li>
-                <li>Piloted and deployed AI-powered tools for procedural video and infographic generation, and supported the rollout of AI smart search, article analytics and feedback collection in the documentation portal.</li>
+                <li>Piloted and deployed AI-powered tools for procedural video and infographic generation, and supported the rollout of AI smart search and article analytics in the documentation portal.</li>
                 <li>Migrated legacy documentation to modern templates, standardizing structure, repairing broken links and refreshing branding.</li>
               </ul>
             </div>
@@ -299,6 +290,7 @@
             <span class="sample-link">[Add sample link]</span>
           </article>
 
+
           <article class="card work-card reveal">
             <div class="work-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
             <h3>AI-Powered Documentation Portal</h3>
@@ -374,46 +366,15 @@
           <p class="section-sub">Available as an immediate joiner for Senior or Lead Technical Writer roles.</p>
         </header>
 
-        <div class="contact-grid">
+        <div class="contact-grid single">
           <div class="contact-info reveal">
             <ul>
               <li><i class="fa-solid fa-envelope"></i><div><span>Email</span><a href="mailto:vrs.gowrishankar@gmail.com">vrs.gowrishankar@gmail.com</a></div></li>
               <li><i class="fa-solid fa-phone"></i><div><span>Phone</span><a href="tel:+918344148677">+91-8344148677</a></div></li>
               <li><i class="fa-solid fa-location-dot"></i><div><span>Location</span><p>Coimbatore, Tamil Nadu</p></div></li>
-              <li><i class="fa-brands fa-linkedin-in"></i><div><span>LinkedIn</span><a href="#" class="placeholder-link" data-name="LinkedIn">[Add LinkedIn URL]</a></div></li>
+              <li><i class="fa-brands fa-linkedin-in"></i><div><span>LinkedIn</span><a href="https://www.linkedin.com/in/vrs-gowrishankar/" target="_blank" rel="noopener noreferrer">linkedin.com/in/vrs-gowrishankar</a></div></li>
             </ul>
           </div>
-
-          <form class="contact-form card reveal" id="contactForm" novalidate>
-            <div class="field">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" autocomplete="name" required aria-describedby="nameErr" />
-              <small class="error" id="nameErr" role="alert"></small>
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="emailErr" />
-              <small class="error" id="emailErr" role="alert"></small>
-            </div>
-            <div class="field">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" name="subject" required aria-describedby="subjectErr" />
-              <small class="error" id="subjectErr" role="alert"></small>
-            </div>
-            <div class="field">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" required aria-describedby="messageErr"></textarea>
-              <small class="error" id="messageErr" role="alert"></small>
-            </div>
-            <button type="submit" class="btn btn-primary">Send Message <i class="fa-solid fa-paper-plane"></i></button>
-            <p class="form-note">
-              <i class="fa-solid fa-circle-info"></i>
-              Note: a static website cannot send email by itself. Real delivery needs a backend or a form service
-              (for example Formspree or Netlify Forms). Until one is connected, submitting opens your email app
-              with the message pre-filled.
-            </p>
-            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-          </form>
         </div>
       </div>
     </section>
@@ -428,8 +389,7 @@
   </footer>
 
   <button class="to-top" id="toTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
+  
   <script src="script.js"></script>
 </body>
 </html>
