@@ -1,5 +1,6 @@
 /* ==========================================================
-   Gowrishankar R – Portfolio interactions
+   Gowrishankar R – Portfolio interactions (no dependencies)
+   1. Mobile menu   2. Active-section highlighting   3. Footer year
    ========================================================== */
 (function () {
   "use strict";
@@ -12,91 +13,50 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ---------- Mobile navigation ---------- */
-  const navToggle = $("#navToggle");
-  const navMenu = $("#navMenu");
+  const toggle = $("#navToggle");
+  const menu = $("#navMenu");
 
   function setMenu(open) {
-    navMenu.classList.toggle("open", open);
-    navToggle.setAttribute("aria-expanded", String(open));
-    navToggle.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+    menu.classList.toggle("open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
   }
-  navToggle.addEventListener("click", () => setMenu(!navMenu.classList.contains("open")));
-  $$(".nav-link").forEach((l) => l.addEventListener("click", () => setMenu(false)));
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && navMenu.classList.contains("open")) {
-      setMenu(false);
-      navToggle.focus();
-    }
-  });
+
+  if (toggle && menu) {
+    toggle.addEventListener("click", () => setMenu(!menu.classList.contains("open")));
+    $$(".nav-link", menu).forEach((link) => link.addEventListener("click", () => setMenu(false)));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menu.classList.contains("open")) {
+        setMenu(false);
+        toggle.focus();
+      }
+    });
+    // Close the menu if the window is resized to desktop width
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1120) setMenu(false);
+    });
+  }
 
   /* ---------- Active navigation highlighting ---------- */
-  const sections = $$("main section[id]");
-  const navLinks = $$(".nav-link");
-  if ("IntersectionObserver" in window) {
-    const navObserver = new IntersectionObserver(
+  const links = $$(".nav-link");
+  const sections = links
+    .map((l) => document.getElementById((l.getAttribute("href") || "").slice(1)))
+    .filter(Boolean);
+
+  if ("IntersectionObserver" in window && sections.length) {
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            navLinks.forEach((l) => {
-              const active = l.getAttribute("href") === "#" + entry.target.id;
-              l.classList.toggle("active", active);
-              if (active) l.setAttribute("aria-current", "true");
-              else l.removeAttribute("aria-current");
-            });
-          }
+          if (!entry.isIntersecting) return;
+          links.forEach((l) => {
+            const active = l.getAttribute("href") === "#" + entry.target.id;
+            if (active) l.setAttribute("aria-current", "true");
+            else l.removeAttribute("aria-current");
+          });
         });
       },
-      { rootMargin: "-45% 0px -50% 0px" }
+      { rootMargin: "-30% 0px -60% 0px" }
     );
-    sections.forEach((s) => navObserver.observe(s));
+    sections.forEach((s) => observer.observe(s));
   }
-
-  /* ---------- Scroll reveal ---------- */
-  const revealEls = $$(".reveal");
-  if ("IntersectionObserver" in window) {
-    const revealObserver = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-    revealEls.forEach((el, i) => {
-      el.style.transitionDelay = (i % 4) * 70 + "ms"; // small stagger
-      revealObserver.observe(el);
-    });
-  } else {
-    revealEls.forEach((el) => el.classList.add("visible"));
-  }
-
-  /* ---------- Count-up for numeric stats ---------- */
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  $$("[data-count]").forEach((el) => {
-    const target = parseFloat(el.dataset.count);
-    const decimals = parseInt(el.dataset.decimals || "0", 10);
-    if (reduceMotion || isNaN(target)) return;
-    el.textContent = (0).toFixed(decimals);
-    const obs = new IntersectionObserver((entries, o) => {
-      if (!entries[0].isIntersecting) return;
-      const start = performance.now();
-      const duration = 1200;
-      (function tick(now) {
-        const p = Math.min((now - start) / duration, 1);
-        el.textContent = (target * p).toFixed(decimals);
-        if (p < 1) requestAnimationFrame(tick);
-      })(start);
-      o.disconnect();
-    });
-    obs.observe(el);
-  });
-
-  /* ---------- Back-to-top button ---------- */
-  const toTop = $("#toTop");
-  window.addEventListener("scroll", () => toTop.classList.toggle("show", window.scrollY > 500), { passive: true });
-  toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }));
-
 })();
