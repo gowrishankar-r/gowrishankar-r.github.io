@@ -1,6 +1,6 @@
 /* ==========================================================
    Gowrishankar R – Portfolio interactions (no dependencies)
-   1. Mobile menu   2. Active-section highlighting   3. Footer year
+   1. Mobile menu   2. Active-section highlighting   3. Footer year   4. Scroll reveal
    ========================================================== */
 (function () {
   "use strict";
@@ -58,5 +58,22 @@
       { rootMargin: "-30% 0px -60% 0px" }
     );
     sections.forEach((s) => observer.observe(s));
+  }
+
+  /* ---------- Scroll reveal (progressive enhancement) ---------- */
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if ("IntersectionObserver" in window && !reduce) {
+    document.documentElement.classList.add("js-reveal");
+    const targets = $$(".section-head, .card, .sample-group > h3, .sample, .step, .award-list li, .workflow-head");
+    targets.forEach((el, i) => { el.classList.add("reveal"); el.style.transitionDelay = (i % 4) * 60 + "ms"; });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+        setTimeout(() => { e.target.style.transitionDelay = ""; }, 800);
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+    targets.forEach((el) => io.observe(el));
   }
 })();
